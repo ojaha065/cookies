@@ -7,8 +7,8 @@
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
 // @grant        none
 // @iconURL      https://orteil.dashnet.org/cookieclicker/beta/img/favicon.ico
-// @updateURL    TODO
-// @downloadURL  TODO
+// @updateURL    https://raw.githubusercontent.com/ojaha065/cookies/master/cookiesUpdate.user.js
+// @downloadURL  https://raw.githubusercontent.com/ojaha065/cookies/master/cookies.user.js
 // @run-at       document-idle
 // @noframes
 // ==/UserScript==
