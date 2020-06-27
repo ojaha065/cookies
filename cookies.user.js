@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.1
+// @version      1.2.2
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -47,7 +47,7 @@
             nameOfLastBuilding = Game.ObjectsById[Game.ObjectsById.length - 1].name;
 
             M = Game.ObjectsById[7].minigame;
-            Game.Objects["Bank"].minigame.secondsPerTick = 1;
+            Game.Objects["Bank"].minigame.secondsPerTick = 10;
 
             document.addEventListener("keydown", (e) => {
                 if (!keydown && e.code === "Insert") {
@@ -148,10 +148,10 @@
                     });
                 }
                 else if (e.code === "PageDown") {
-                    Game.Objects["Bank"].minigame.secondsPerTick = 60;
+                    Game.Objects["Bank"].minigame.secondsPerTick = Number.MAX_SAFE_INTEGER;
                 }
                 else if (e.code === "PageUp") {
-                    Game.Objects["Bank"].minigame.secondsPerTick = 1;
+                    Game.Objects["Bank"].minigame.secondsPerTick = 10;
                 }
             });
         }
