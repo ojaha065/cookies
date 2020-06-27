@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.0
+// @version      1.2.1
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -18,6 +18,8 @@
     const TRY_TO_FIND_SHINY_WRINKLERS = true;
 
     const dragonDrops = ["Dragon scale", "Dragon claw", "Dragon fang", "Dragon teddy bear"];
+
+    let nameOfLastBuilding;
 
     let keydown = false;
     let interval, interval2, interval4, interval5, interval6;
@@ -41,6 +43,8 @@
             clearInterval(initInterval);
             Game.LoadMod("https://hamusutaa.net/cookie-garden-progress/main.js");
             Game.LoadMod("https://rawgit.com/yannprada/cookie-garden-helper/master/cookie-garden-helper.js");
+
+            nameOfLastBuilding = Game.ObjectsById[Game.ObjectsById.length - 1].name;
 
             M = Game.ObjectsById[7].minigame;
             Game.Objects["Bank"].minigame.secondsPerTick = 1;
@@ -161,7 +165,7 @@
         else{
             let result = true;
             Game.ObjectsById.forEach((o) => {
-                if (o.amount < 400 && o.name !== "Javascript console") {
+                if (o.amount < 400 && o.name !== nameOfLastBuilding) {
                     Game.Notify(`${object.name,object.amount}!!!`);
                     result = false;
                 }
