@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.1.0
+// @version      1.2.0
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -17,8 +17,10 @@
 (function() {
     const TRY_TO_FIND_SHINY_WRINKLERS = true;
 
+    const dragonDrops = ["Dragon scale", "Dragon claw", "Dragon fang", "Dragon teddy bear"];
+
     let keydown = false;
-    let interval, interval2, interval4, interval5;
+    let interval, interval2, interval4, interval5, interval6;
     let M;
     let noBadCookies = false;
 
@@ -46,15 +48,17 @@
             document.addEventListener("keydown", (e) => {
                 if (!keydown && e.code === "Insert") {
                     keydown = true;
-                    if (interval || interval2 || interval4 || interval5) {
+                    if (interval || interval2 || interval4 || interval5 || interval6) {
                         clearInterval(interval);
                         clearInterval(interval2);
                         clearInterval(interval4);
                         clearInterval(interval5);
+                        clearInterval(interval6);
                         interval = null;
                         interval2 = null;
                         interval4 = null;
                         interval5 = null;
+                        interval6 = null;
                     }
                     else {
                         interval = setInterval(() => {
@@ -112,6 +116,21 @@
                                 tickerElement.dispatchEvent(event);
                             }
                         }, 2500);
+
+                        interval6 = setInterval(() => {
+                            Game.ClickSpecialPic();
+
+                            let hasAll = true;
+                            for (const i in dragonDrops) {
+                                if (!Game.Has(dragonDrops[i]) && !Game.HasUnlocked(dragonDrops[i])) {
+                                    hasAll = false;
+                                    break;
+                                }
+                            }
+                            if (hasAll) {
+                                clearInterval(interval6);
+                            }
+                        }, 2001);
                     }
 
                     setTimeout(() => {
