@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.0.0
+// @version      1.1.0
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -39,7 +39,9 @@
             clearInterval(initInterval);
             Game.LoadMod("https://hamusutaa.net/cookie-garden-progress/main.js");
             Game.LoadMod("https://rawgit.com/yannprada/cookie-garden-helper/master/cookie-garden-helper.js");
+
             M = Game.ObjectsById[7].minigame;
+            Game.Objects["Bank"].minigame.secondsPerTick = 1;
 
             document.addEventListener("keydown", (e) => {
                 if (!keydown && e.code === "Insert") {
@@ -121,6 +123,12 @@
                     setInterval(() => {
                         prestigePrintArea.innerHTML = Beautify(Math.floor(Game.HowMuchPrestige(Game.cookiesReset + Game.cookiesEarned)));
                     });
+                }
+                else if (e.code === "PageDown") {
+                    Game.Objects["Bank"].minigame.secondsPerTick = 60;
+                }
+                else if (e.code === "PageUp") {
+                    Game.Objects["Bank"].minigame.secondsPerTick = 1;
                 }
             });
         }
