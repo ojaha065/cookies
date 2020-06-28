@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.2
+// @version      1.2.3
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -95,14 +95,15 @@
                         }, 1500);
 
                         interval4 = setInterval(() => {
-                            if (TRY_TO_FIND_SHINY_WRINKLERS || Game.season === "halloween" || Game.season === "easter") {
+                            const isWrinklerSeason = Game.season === "halloween" || Game.season === "easter";
+                            if (TRY_TO_FIND_SHINY_WRINKLERS || isWrinklerSeason) {
                                 Game.wrinklers.forEach((wrinkler) => {
                                     if (wrinkler.sucked > 0 && wrinkler.type === 0) {
                                         wrinkler.hp = 0;
                                     }
                                 });
 
-                                if (M.magic === M.magicM) {
+                                if (M.magic === M.magicM && isWrinklerSeason) {
                                     M.castSpell(M.spells["resurrect abomination"]);
                                 }
                             }
