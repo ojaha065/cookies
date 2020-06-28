@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.3
+// @version      1.2.4
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -33,6 +33,7 @@
             && Array.isArray(Game.shimmers)
             && Game.ObjectsById
             && Game.ObjectsById[7].minigame
+            && Game.Objects["Bank"].minigame
             && Game.hasBuff
             && Game.LoadMod
             && Game.wrinklers
