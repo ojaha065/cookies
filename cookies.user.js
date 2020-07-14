@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.4
+// @version      1.2.5
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -25,6 +25,11 @@
     let interval, interval2, interval4, interval5, interval6;
     let M;
     let noBadCookies = false;
+
+    confirm = (text) => {
+        console.log(`Confirmed: ${text}`);
+        return true;
+    };
 
     const init = () => {
         if (Game
