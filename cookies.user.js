@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.5
+// @version      1.2.7
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -30,6 +30,12 @@
         console.log(`Confirmed: ${text}`);
         return true;
     };
+
+    // CSS overrides
+    const styleElement = document.createElement("style");
+    styleElement.type = "text/css";
+    styleElement.appendChild(document.createTextNode(".warning {color: #ffcc00;} .owned {opacity: 0.8 !important;}"));
+    document.getElementsByTagName("head")[0].appendChild(styleElement);
 
     const init = () => {
         if (Game
