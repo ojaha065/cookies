@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.7
+// @version      1.2.8
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -55,6 +55,7 @@
             clearInterval(initInterval);
             Game.LoadMod("https://hamusutaa.net/cookie-garden-progress/main.js");
             Game.LoadMod("https://rawgit.com/yannprada/cookie-garden-helper/master/cookie-garden-helper.js");
+            Game.LoadMod('https://nyhilo.github.io/KookieStocks/kookiestocks.js')
 
             nameOfLastBuilding = Game.ObjectsById[Game.ObjectsById.length - 1].name;
 
@@ -172,10 +173,10 @@
 
     const areWeAlmostAtFourHundred = () => {
         const amountOfLastBuilding = Game.ObjectsById[Game.ObjectsById.length - 1].amount;
-        if(amountOfLastBuilding >= 400 || amountOfLastBuilding < 370){
+        if (amountOfLastBuilding >= 400 || amountOfLastBuilding < 370) {
            return false;
         }
-        else{
+        else {
             let result = true;
             Game.ObjectsById.forEach((o) => {
                 if (o.amount < 400 && o.name !== nameOfLastBuilding) {
