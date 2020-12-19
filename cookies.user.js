@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cookies
 // @namespace    https://jaha1.mbnet.fi
-// @version      1.2.8
+// @version      1.4.0
 // @description  Making life little less painful!
 // @author       Jani Haiko
 // @match        *://orteil.dashnet.org/cookieclicker/beta/
@@ -15,7 +15,7 @@
 
 "use strict";
 (function() {
-    const TRY_TO_FIND_SHINY_WRINKLERS = true;
+    const TRY_TO_FIND_SHINY_WRINKLERS = false;
 
     const dragonDrops = ["Dragon scale", "Dragon claw", "Dragon fang", "Dragon teddy bear"];
 
@@ -53,9 +53,15 @@
             && Game.tickerL
             && typeof(Game.TickerEffect) !== "undefined") {
             clearInterval(initInterval);
+            Game.LoadMod("https://klattmose.github.io/CookieClicker/IdleTrading.js");
+            Game.LoadMod("https://klattmose.github.io/CookieClicker/minigameCasino.js");
+            Game.LoadMod("https://klattmose.github.io/CookieClicker/CCSE-POCs/TimerWidget.js");
+            Game.LoadMod("https://klattmose.github.io/CookieClicker/CCSE-POCs/HurricaneSugar.js");
+            Game.LoadMod("https://klattmose.github.io/CookieClicker/AmericanSeason.js");
+            Game.LoadMod("https://klattmose.github.io/CookieClicker/CCSE-POCs/BlackholeInverter.js");
             Game.LoadMod("https://hamusutaa.net/cookie-garden-progress/main.js");
             Game.LoadMod("https://rawgit.com/yannprada/cookie-garden-helper/master/cookie-garden-helper.js");
-            Game.LoadMod('https://nyhilo.github.io/KookieStocks/kookiestocks.js')
+            //Game.LoadMod("https://nyhilo.github.io/KookieStocks/kookiestocks.js");
 
             nameOfLastBuilding = Game.ObjectsById[Game.ObjectsById.length - 1].name;
 
@@ -80,6 +86,16 @@
                     else {
                         interval = setInterval(() => {
                             Game.ClickCookie();
+
+                            if (Date.now() - Game.lumpT > Game.lumpRipeAge) {
+                                Game.clickLump();
+                            } else if (Game.season === "american") {
+                                Game.shimmers.forEach((shimmer) => {
+                                    if (shimmer.type === "rocket") {
+                                        shimmer.pop();
+                                    }
+                                });
+                            }
                         }, 200);
 
                         interval2 = setInterval(() => {
@@ -119,10 +135,6 @@
                                 if (M.magic === M.magicM && isWrinklerSeason) {
                                     M.castSpell(M.spells["resurrect abomination"]);
                                 }
-                            }
-
-                            if (Date.now() - Game.lumpT > Game.lumpRipeAge) {
-                                Game.clickLump();
                             }
                         }, 30000);
 
@@ -187,6 +199,6 @@
             return result;
         }
     };
-    
+
     const initInterval = setInterval(init, 500);
 })();
